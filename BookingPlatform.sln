@@ -5,12 +5,55 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A7617D1F-3AD4-4334-B961-4D391E8E6C1D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microservices", "Microservices", "{43DAD759-B77B-40CA-83B5-31773E573603}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{27BF7B48-AF44-445B-A38F-5BF374C2E40F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{2C57973D-79F2-4609-8978-381DF88F0630}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utils", "Utils", "{7640BBE0-F7B6-476E-BA10-F4A58E67D874}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdentityMS", "IdentityMS", "{1C3118BE-474C-4652-94B7-1462713DB60C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BP.IdentityMS.IdentityApi", "src\Microservices\IdentityMS\BP.IdentityMS.IdentityApi\BP.IdentityMS.IdentityApi.csproj", "{301ECBD4-6866-46B1-B998-D191EF3352ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BP.IdentityMS.Data", "src\Microservices\IdentityMS\BP.IdentityMS.Data\BP.IdentityMS.Data.csproj", "{DB0E6E45-CCBD-4937-BDB8-DB87B83AA151}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BP.IdentityMS.Business", "src\Microservices\IdentityMS\BP.IdentityMS.Business\BP.IdentityMS.Business.csproj", "{9F1DFE57-51BC-45EA-94AF-D552AB317FF2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{301ECBD4-6866-46B1-B998-D191EF3352ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{301ECBD4-6866-46B1-B998-D191EF3352ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{301ECBD4-6866-46B1-B998-D191EF3352ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{301ECBD4-6866-46B1-B998-D191EF3352ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB0E6E45-CCBD-4937-BDB8-DB87B83AA151}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB0E6E45-CCBD-4937-BDB8-DB87B83AA151}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB0E6E45-CCBD-4937-BDB8-DB87B83AA151}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB0E6E45-CCBD-4937-BDB8-DB87B83AA151}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F1DFE57-51BC-45EA-94AF-D552AB317FF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F1DFE57-51BC-45EA-94AF-D552AB317FF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F1DFE57-51BC-45EA-94AF-D552AB317FF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F1DFE57-51BC-45EA-94AF-D552AB317FF2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{43DAD759-B77B-40CA-83B5-31773E573603} = {A7617D1F-3AD4-4334-B961-4D391E8E6C1D}
+		{27BF7B48-AF44-445B-A38F-5BF374C2E40F} = {A7617D1F-3AD4-4334-B961-4D391E8E6C1D}
+		{2C57973D-79F2-4609-8978-381DF88F0630} = {A7617D1F-3AD4-4334-B961-4D391E8E6C1D}
+		{7640BBE0-F7B6-476E-BA10-F4A58E67D874} = {A7617D1F-3AD4-4334-B961-4D391E8E6C1D}
+		{1C3118BE-474C-4652-94B7-1462713DB60C} = {43DAD759-B77B-40CA-83B5-31773E573603}
+		{301ECBD4-6866-46B1-B998-D191EF3352ED} = {1C3118BE-474C-4652-94B7-1462713DB60C}
+		{DB0E6E45-CCBD-4937-BDB8-DB87B83AA151} = {1C3118BE-474C-4652-94B7-1462713DB60C}
+		{9F1DFE57-51BC-45EA-94AF-D552AB317FF2} = {1C3118BE-474C-4652-94B7-1462713DB60C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {25273D0F-A052-41BE-9274-843EB802C29A}
 	EndGlobalSection
 EndGlobal
