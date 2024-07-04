@@ -1,6 +1,0 @@
-@BP.IdentityMS.IdentityApi_HostAddress = http://localhost:5296
-
-GET {{BP.IdentityMS.IdentityApi_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
