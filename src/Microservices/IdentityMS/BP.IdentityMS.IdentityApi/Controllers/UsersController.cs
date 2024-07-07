@@ -16,7 +16,7 @@ namespace BP.IdentityMS.IdentityApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> RegisterUserAsync(UserRegisterCommand userRegisterCommand)
+        public async Task<IActionResult> RegisterUserAsync([FromBody] UserRegisterCommand userRegisterCommand)
         {
             var result = await _mediator.Send(userRegisterCommand);
             return Ok(result);

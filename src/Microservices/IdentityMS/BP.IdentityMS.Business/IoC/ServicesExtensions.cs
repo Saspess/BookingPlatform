@@ -1,5 +1,7 @@
 ﻿using System.Reflection;
 using BP.IdentityMS.Data.IoC;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,7 +13,8 @@ namespace BP.IdentityMS.Business.IoC
         {
             services.ConfigureIdentityData(configuration)
                 .ConfigureAutoMapper()
-                .ConfigureMediatR();
+                .ConfigureMediatR()
+                .ConfigureFluentValidation();
 
             return services;
         }
@@ -25,6 +28,14 @@ namespace BP.IdentityMS.Business.IoC
         private static IServiceCollection ConfigureMediatR(this IServiceCollection services)
         {
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+            return services;
+        }
+
+        private static IServiceCollection ConfigureFluentValidation(this IServiceCollection services)
+        {
+            services.AddFluentValidationAutoValidation()
+                .AddValidatorsFromAssembly(Assembly.GetExecutingAssembly(), includeInternalTypes: true);
+
             return services;
         }
     }
