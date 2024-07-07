@@ -6,7 +6,7 @@ namespace BP.IdentityMS.Data.Repositories.Contracts
     {
         Task<IEnumerable<UserEntity>> GetAllAsync();
         Task<UserEntity> GetByIdAsync(string id);
-        Task CreateAsync(UserEntity entity);
+        Task<string> CreateAsync(UserEntity entity);
         Task UpdateAsync(UserEntity entity);
         Task DeleteAsync(string id);
     }

@@ -26,9 +26,10 @@ namespace BP.IdentityMS.Data.Repositories
             return await _collection.Find(e => e.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task CreateAsync(UserEntity entity)
+        public async Task<string> CreateAsync(UserEntity entity)
         {
             await _collection.InsertOneAsync(entity);
+            return entity.Id;
         }
 
         public async Task UpdateAsync(UserEntity entity)
