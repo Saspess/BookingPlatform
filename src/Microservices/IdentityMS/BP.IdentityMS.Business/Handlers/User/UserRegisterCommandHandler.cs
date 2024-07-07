@@ -1,4 +1,6 @@
-﻿using BP.IdentityMS.Business.Commands.User;
+﻿using BP.Business.Common.Constants;
+using BP.Business.Common.Exceptions;
+using BP.IdentityMS.Business.Commands.User;
 using BP.IdentityMS.Data.Entities;
 using BP.IdentityMS.Data.Repositories.Contracts;
 using BP.Utils.Helpers;
@@ -20,7 +22,13 @@ namespace BP.IdentityMS.Business.Handlers.User
             ArgumentNullException.ThrowIfNull(command);
 
             // TODO: Add personal data sending
-            // TODO: Check for existing account
+
+            var existingUser = await _userRepository.GetFirstOrDefaultAsync(x => x.Email == command.Email);
+
+            if (existingUser != null)
+            {
+                throw new ServerConflictException(ExceptionMessages.UserAlreadyExists);
+            }
 
             var userEntity = new UserEntity()
             {
