@@ -8,9 +8,9 @@ namespace BP.IdentityMS.Business.Handlers.User
 {
     internal class UserRegisterCommandHandler : IRequestHandler<UserRegisterCommand, string>
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IGenericRepository<UserEntity> _userRepository;
 
-        public UserRegisterCommandHandler(IUserRepository userRepository)
+        public UserRegisterCommandHandler(IGenericRepository<UserEntity> userRepository)
         {
             _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
         }

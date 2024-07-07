@@ -21,7 +21,7 @@ namespace BP.IdentityMS.Data.IoC
 
         private static IServiceCollection ConfigureRepositories(this IServiceCollection services)
         {
-            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             return services;
         }
 
