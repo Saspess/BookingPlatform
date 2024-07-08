@@ -33,6 +33,9 @@ namespace BP.IdentityMS.Business.Validators.User
                 .NotNull()
                 .NotEmpty()
                 .Equal(u => u.Password);
+
+            RuleFor(u => u.Role)
+                .IsInEnum();
         }
     }
 }
