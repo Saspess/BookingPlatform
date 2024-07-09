@@ -23,7 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BP.IdentityMS.Business", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BP.Utils", "src\Utils\BP.Utils\BP.Utils.csproj", "{79834715-291A-4804-BEB2-85CB4408C67E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BP.Business.Common", "src\Common\BP.Business.Common\BP.Business.Common.csproj", "{86CAC2A9-EC77-4B21-AB7D-412D47DD60B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BP.Business.Common", "src\Common\BP.Business.Common\BP.Business.Common.csproj", "{86CAC2A9-EC77-4B21-AB7D-412D47DD60B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BP.AuthProvider", "src\Infrastructure\BP.AuthProvider\BP.AuthProvider.csproj", "{171E0EED-F37C-421E-9438-5E5243710EFE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{86CAC2A9-EC77-4B21-AB7D-412D47DD60B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86CAC2A9-EC77-4B21-AB7D-412D47DD60B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86CAC2A9-EC77-4B21-AB7D-412D47DD60B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{171E0EED-F37C-421E-9438-5E5243710EFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{171E0EED-F37C-421E-9438-5E5243710EFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{171E0EED-F37C-421E-9438-5E5243710EFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{171E0EED-F37C-421E-9438-5E5243710EFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +72,7 @@ Global
 		{9F1DFE57-51BC-45EA-94AF-D552AB317FF2} = {1C3118BE-474C-4652-94B7-1462713DB60C}
 		{79834715-291A-4804-BEB2-85CB4408C67E} = {7640BBE0-F7B6-476E-BA10-F4A58E67D874}
 		{86CAC2A9-EC77-4B21-AB7D-412D47DD60B2} = {2C57973D-79F2-4609-8978-381DF88F0630}
+		{171E0EED-F37C-421E-9438-5E5243710EFE} = {27BF7B48-AF44-445B-A38F-5BF374C2E40F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {25273D0F-A052-41BE-9274-843EB802C29A}

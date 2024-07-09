@@ -1,4 +1,5 @@
 ﻿using BP.IdentityMS.Business.Commands.User;
+using BP.IdentityMS.Business.Queries.User;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,6 +14,13 @@ namespace BP.IdentityMS.IdentityApi.Controllers
         public UsersController(IMediator mediator)
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+        }
+
+        [HttpGet("token")]
+        public async Task<IActionResult> LoginAsync([FromQuery] UserLoginQuery userLoginQuery)
+        {
+            var result = await _mediator.Send(userLoginQuery);
+            return Ok(result);
         }
 
         [HttpPost]

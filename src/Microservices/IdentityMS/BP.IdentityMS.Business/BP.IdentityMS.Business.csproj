@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\BP.Business.Common\BP.Business.Common.csproj" />
+    <ProjectReference Include="..\..\..\Infrastructure\BP.AuthProvider\BP.AuthProvider.csproj" />
     <ProjectReference Include="..\..\..\Utils\BP.Utils\BP.Utils.csproj" />
     <ProjectReference Include="..\BP.IdentityMS.Data\BP.IdentityMS.Data.csproj" />
   </ItemGroup>
