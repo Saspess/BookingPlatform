@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\BP.Api.Common\BP.Api.Common.csproj" />
     <ProjectReference Include="..\BP.IdentityMS.Business\BP.IdentityMS.Business.csproj" />
   </ItemGroup>
 

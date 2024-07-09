@@ -1,4 +1,5 @@
-﻿using BP.IdentityMS.Business.IoC;
+﻿using BP.Api.Common.Middleware;
+using BP.IdentityMS.Business.IoC;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 
