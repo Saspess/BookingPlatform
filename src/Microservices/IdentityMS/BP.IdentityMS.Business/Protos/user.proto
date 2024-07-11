@@ -6,7 +6,7 @@ package user;
 
 service UserService
 {
-    rpc CreateUserAccountAsync (CreateUserAccountRequest) returns (CreateUserAccountResponse);
+    rpc CreateUserAccount (CreateUserAccountRequest) returns (CreateUserAccountResponse);
 }
 
 message CreateUserAccountRequest

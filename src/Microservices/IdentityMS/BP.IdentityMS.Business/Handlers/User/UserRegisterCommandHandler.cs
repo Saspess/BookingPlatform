@@ -41,7 +41,7 @@ namespace BP.IdentityMS.Business.Handlers.User
             });
 
             var client = new UserService.UserServiceClient(channel);
-            var accountCreationResponse = client.CreateUserAccountAsync(createUserAccountRequest, cancellationToken: cancellationToken);
+            var accountCreationResponse = client.CreateUserAccount(createUserAccountRequest, cancellationToken: cancellationToken);
 
             if (!accountCreationResponse.IsSuccessfullyCreated)
             {

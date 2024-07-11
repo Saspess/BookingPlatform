@@ -13,7 +13,7 @@ namespace BP.AccountsMS.AccountsApi.Services
             _userAccountService = userAccountService ?? throw new ArgumentNullException(nameof(userAccountService));
         }
 
-        public override async Task<CreateUserAccountResponse> CreateUserAccountAsync(CreateUserAccountRequest request, ServerCallContext context)
+        public override async Task<CreateUserAccountResponse> CreateUserAccount(CreateUserAccountRequest request, ServerCallContext context)
         {
             var result = await _userAccountService.CreateUserAccountAsync(request);
             return result;
