@@ -5,6 +5,8 @@ using FluentValidation.AspNetCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using BP.AuthProvider.IoC;
+using BP.IdentityMS.Business.Settings;
+using BP.IdentityMS.Business.Constants;
 
 namespace BP.IdentityMS.Business.IoC
 {
@@ -16,7 +18,8 @@ namespace BP.IdentityMS.Business.IoC
                 .ConfigureAutoMapper()
                 .ConfigureMediatR()
                 .ConfigureFluentValidation()
-                .ConfigureAuthProvider(configuration);
+                .ConfigureAuthProvider(configuration)
+                .ConfigureBusinessOptions(configuration);
 
             return services;
         }
@@ -38,6 +41,12 @@ namespace BP.IdentityMS.Business.IoC
             services.AddFluentValidationAutoValidation()
                 .AddValidatorsFromAssembly(Assembly.GetExecutingAssembly(), includeInternalTypes: true);
 
+            return services;
+        }
+
+        private static IServiceCollection ConfigureBusinessOptions(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.Configure<GrpcConnectionSettings>(options => configuration.GetSection(SectionNames.GrpcSettings).Bind(options));
             return services;
         }
     }

@@ -14,7 +14,7 @@ namespace BP.IdentityMS.Data.IoC
         {
             services.ConfigureRepositories()
                 .ConfigureMongoDb(configuration)
-                .ConfigureOptions(configuration);
+                .ConfigureDataOptions(configuration);
 
             return services;
         }
@@ -31,7 +31,7 @@ namespace BP.IdentityMS.Data.IoC
             return services;
         }
 
-        private static IServiceCollection ConfigureOptions(this IServiceCollection services, IConfiguration configuration)
+        private static IServiceCollection ConfigureDataOptions(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<MongoDbSettings>(options => configuration.GetSection(SectionNames.MongoDb).Bind(options));
             return services;

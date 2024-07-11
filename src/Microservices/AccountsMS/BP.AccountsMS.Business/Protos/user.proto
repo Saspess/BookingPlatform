@@ -1,0 +1,24 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "GrpcContracts";
+
+package user;
+
+service UserService
+{
+    rpc CreateUserAccount (CreateUserAccountRequest) returns (CreateUserAccountResponse);
+}
+
+message CreateUserAccountRequest
+{
+    string FirstName = 1;
+    string LastName = 2;
+    string Email = 3;
+    string Role = 4;
+}
+
+message CreateUserAccountResponse
+{
+    bool IsSuccessfullyCreated = 1;
+    string ExceptionMessage = 2;
+}
