@@ -9,7 +9,7 @@ namespace BP.AccountsMS.Data.Repositories
 
         public BaseRepository(IDbTransaction transaction)
         {
-            this.transaction = transaction;
+            this.transaction = transaction ?? throw new ArgumentNullException(nameof(transaction));
         }
     }
 }

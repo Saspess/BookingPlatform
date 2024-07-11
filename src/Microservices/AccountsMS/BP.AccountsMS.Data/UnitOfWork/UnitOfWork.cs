@@ -15,7 +15,7 @@ namespace BP.AccountsMS.Data.UnitOfWork
 
         public UnitOfWork(IDbConnection dbConnection)
         {
-            _connection = dbConnection;
+            _connection = dbConnection ?? throw new ArgumentNullException(nameof(dbConnection));
             _connection.Open();
             _transaction = _connection.BeginTransaction();
         }
