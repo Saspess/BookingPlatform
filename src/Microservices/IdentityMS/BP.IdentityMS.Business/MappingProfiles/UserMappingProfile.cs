@@ -2,9 +2,9 @@
 using BP.AuthProvider.Models;
 using BP.IdentityMS.Business.Commands.User;
 using BP.IdentityMS.Business.Enums;
-using BP.IdentityMS.Business.Queries.User;
 using BP.IdentityMS.Data.Entities;
 using BP.Utils.Helpers;
+using GrpcContracts;
 
 namespace BP.IdentityMS.Business.MappingProfiles
 {
@@ -17,6 +17,9 @@ namespace BP.IdentityMS.Business.MappingProfiles
                 .ForMember(dest => dest.Role, opt => opt.MapFrom(src => Enum.GetName(typeof(Role), src.Role).ToString()));
 
             CreateMap<UserEntity, AuthModel>();
+
+            CreateMap<UserRegisterCommand, CreateUserAccountRequest>()
+                .ForMember(dest => dest.Role, opt => opt.MapFrom(src => Enum.GetName(typeof(Role), src.Role).ToString()));
         }
     }
 }

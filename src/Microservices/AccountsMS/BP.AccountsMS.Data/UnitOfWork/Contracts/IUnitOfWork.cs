@@ -2,7 +2,7 @@
 
 namespace BP.AccountsMS.Data.UnitOfWork.Contracts
 {
-    public interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork
     {
         IUserRepository UserRepository { get; }
         void Commit();

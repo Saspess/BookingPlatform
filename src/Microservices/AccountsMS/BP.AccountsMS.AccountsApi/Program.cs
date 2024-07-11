@@ -1,11 +1,12 @@
-﻿using BP.Api.Common.Middleware;
-using BP.AccountsMS.Data.IoC;
+﻿using BP.AccountsMS.AccountsApi.IoC;
+using BP.AccountsMS.AccountsApi.Services;
+using BP.Api.Common.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-builder.Services.ConfigureAccountsData(builder.Configuration);
+builder.Services.ConfigureAccountsApi(builder.Configuration);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -17,6 +18,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.MapGrpcService<GrpcUserService>();
 
 app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
 

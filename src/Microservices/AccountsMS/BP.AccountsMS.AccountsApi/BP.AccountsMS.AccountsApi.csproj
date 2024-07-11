@@ -8,12 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Grpc.AspNetCore" Version="2.63.0" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.63.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\BP.Api.Common\BP.Api.Common.csproj" />
-    <ProjectReference Include="..\BP.AccountsMS.Data\BP.AccountsMS.Data.csproj" />
+    <ProjectReference Include="..\BP.AccountsMS.Business\BP.AccountsMS.Business.csproj" />
   </ItemGroup>
 
 </Project>

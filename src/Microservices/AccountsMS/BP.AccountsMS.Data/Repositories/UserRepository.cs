@@ -11,12 +11,25 @@ namespace BP.AccountsMS.Data.Repositories
         {
         }
 
-        public async Task<Guid> CreateUserAsync(UserEntity userEntity)
+        public async Task<UserEntity> GetByEmailAsync(string email)
         {
-            var sqlQuery = $@"INSERT INTO Users 
+            var sql = $@"SELECT * FROM Users WHERE Email = @Email";
+
+            var entities = await connection.QueryAsync<UserEntity>(
+                sql,
+                param: new { Email = email },
+                transaction: transaction
+                );
+
+            return entities.FirstOrDefault();
+        }
+
+        public async Task<Guid> CreateAsync(UserEntity userEntity)
+        {
+            var sql = $@"INSERT INTO Users 
                 VALUES(@Id, @FirstName, @LastName, @Email, @IsEmailConfirmed)";
 
-            await connection.ExecuteAsync(sqlQuery,
+            await connection.ExecuteAsync(sql,
                 param: new
                 {
                     Id = userEntity.Id,
