@@ -7,5 +7,6 @@
         public string LastName { get; set; }
         public string Email { get; set; }
         public bool IsEmailConfirmed { get; set; } = false;
+        public string Role { get; set; }
     }
 }

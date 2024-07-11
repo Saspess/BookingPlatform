@@ -27,7 +27,7 @@ namespace BP.AccountsMS.Data.Repositories
         public async Task<Guid> CreateAsync(UserEntity userEntity)
         {
             var sql = $@"INSERT INTO Users 
-                VALUES(@Id, @FirstName, @LastName, @Email, @IsEmailConfirmed)";
+                VALUES(@Id, @FirstName, @LastName, @Email, @IsEmailConfirmed, @Role)";
 
             await connection.ExecuteAsync(sql,
                 param: new
@@ -36,7 +36,8 @@ namespace BP.AccountsMS.Data.Repositories
                     FirstName = userEntity.FirstName,
                     LastName = userEntity.LastName,
                     Email = userEntity.Email,
-                    IsEmailConfirmed = userEntity.IsEmailConfirmed
+                    IsEmailConfirmed = userEntity.IsEmailConfirmed,
+                    Role = userEntity.Role
                 },
                 transaction: transaction);
 
