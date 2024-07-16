@@ -29,16 +29,25 @@ namespace BP.IdentityMS.Business.Handlers.User
         {
             ArgumentNullException.ThrowIfNull(command, nameof(command));
 
+            var existingUser = await _userRepository.GetFirstOrDefaultAsync(u => u.Email == command.Email);
+
+            if (existingUser != null)
+            {
+                throw new ServerConflictException(ExceptionMessages.UserAlreadyExists);
+            }
+
             var createUserAccountRequest = _mapper.Map<CreateUserAccountRequest>(command);
 
-            using var channel = GrpcChannel.ForAddress(_grpcConnectionSettings.ServerAddress, new GrpcChannelOptions
-            {
-                DisposeHttpClient = true,
-                HttpClient = new HttpClient(new SocketsHttpHandler
+            using var channel = GrpcChannel.ForAddress(
+                _grpcConnectionSettings.ServerAddress,
+                new GrpcChannelOptions
                 {
-                    ConnectTimeout = TimeSpan.FromSeconds(_grpcConnectionSettings.ConnectionTimeout)
-                })
-            });
+                    DisposeHttpClient = true,
+                    HttpClient = new HttpClient(new SocketsHttpHandler
+                    {
+                        ConnectTimeout = TimeSpan.FromSeconds(_grpcConnectionSettings.ConnectionTimeout)
+                    })
+                });
 
             var client = new UserService.UserServiceClient(channel);
             var accountCreationResponse = client.CreateUserAccount(createUserAccountRequest, cancellationToken: cancellationToken);
@@ -48,16 +57,8 @@ namespace BP.IdentityMS.Business.Handlers.User
                 throw new ServerConflictException(accountCreationResponse?.ExceptionMessage);
             }
 
-            var existingUser = await _userRepository.GetFirstOrDefaultAsync(x => x.Email == command.Email);
-
-            if (existingUser != null)
-            {
-                throw new ServerConflictException(ExceptionMessages.UserAlreadyExists);
-            }
-
             var userEntity = _mapper.Map<UserEntity>(command);
             var createdEntityId = await _userRepository.CreateAsync(userEntity);
-
             return createdEntityId;
         }
     }
