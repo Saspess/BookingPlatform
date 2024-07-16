@@ -8,7 +8,7 @@ using MongoDB.Driver;
 
 namespace BP.IdentityMS.Data.IoC
 {
-    public static class ServicesExtensions
+    public static class ServiceCollectionExtensions
     {
         public static IServiceCollection ConfigureIdentityData(this IServiceCollection services, IConfiguration configuration)
         {

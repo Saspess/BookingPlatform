@@ -1,13 +1,16 @@
 ﻿using BP.AccountsMS.Business.IoC;
+using BP.Api.Common.IoC;
 
 namespace BP.AccountsMS.AccountsApi.IoC
 {
-    public static class ServicesExtensions
+    public static class ServiceCollectionExtensions
     {
         public static IServiceCollection ConfigureAccountsApi(this IServiceCollection services, IConfiguration configuration)
         {
             services.ConfigureAccountsBusiness(configuration)
-                .ConfigureGrpc();
+                .ConfigureGrpc()
+                .ConfigureCurrentUserService()
+                .ConfigureSwagger();
 
             return services;
         }

@@ -1,6 +1,6 @@
 ﻿namespace BP.AccountsMS.Data.Entities
 {
-    public class UserEntity
+    public class AccountEntity
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public string FirstName { get; set; }

@@ -10,7 +10,7 @@ using BP.IdentityMS.Business.Constants;
 
 namespace BP.IdentityMS.Business.IoC
 {
-    public static class ServicesExtensions
+    public static class ServiceCollectionExtensions
     {
         public static IServiceCollection ConfigureIdentityBusiness(this IServiceCollection services, IConfiguration configuration)
         {

@@ -2,18 +2,20 @@
 using BP.AccountsMS.Business.Services;
 using BP.AccountsMS.Business.Services.Contracts;
 using BP.AccountsMS.Data.IoC;
+using BP.AuthProvider.IoC;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BP.AccountsMS.Business.IoC
 {
-    public static class ServicesExtensions
+    public static class ServiceCollectionExtensions
     {
         public static IServiceCollection ConfigureAccountsBusiness(this IServiceCollection services, IConfiguration configuration)
         {
             services.ConfigureAccountsData(configuration)
                 .ConfigureAutoMapper()
-                .ConfigureServices();
+                .ConfigureServices()
+                .ConfigureAuthProvider(configuration);
 
             return services;
         }
@@ -26,7 +28,7 @@ namespace BP.AccountsMS.Business.IoC
 
         private static IServiceCollection ConfigureServices(this IServiceCollection services)
         {
-            services.AddScoped<IUserAccountService, UserAccountService>();
+            services.AddScoped<IAccountService, AccountService>();
             return services;
         }
     }
