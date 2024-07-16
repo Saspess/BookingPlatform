@@ -25,36 +25,42 @@ namespace BP.AccountsMS.Business.Services
 
         public async Task<AccountViewModel> GetAccountAsync()
         {
-            var currentUserAccount = await _unitOfWork.AccountRepository.GetByEmailAsync(_currentUserService.GetEmail())
-                ?? throw new NotFoundException(ExceptionMessages.UserNotFound);
+            using (_unitOfWork)
+            {
+                var currentUserAccount = await _unitOfWork.AccountRepository.GetByEmailAsync(_currentUserService.GetEmail())
+                    ?? throw new NotFoundException(ExceptionMessages.UserNotFound);
 
-            var accountViewModel = _mapper.Map<AccountViewModel>(currentUserAccount);
-            return accountViewModel;
+                var accountViewModel = _mapper.Map<AccountViewModel>(currentUserAccount);
+                return accountViewModel;
+            }
         }
 
         public async Task<CreateUserAccountResponse> CreateAccountAsync(CreateUserAccountRequest createUserAccountRequest)
         {
             ArgumentNullException.ThrowIfNull(createUserAccountRequest, nameof(createUserAccountRequest));
 
-            var existingUser = await _unitOfWork.AccountRepository.GetByEmailAsync(createUserAccountRequest.Email);
-
-            if (existingUser != null)
+            using (_unitOfWork)
             {
+                var existingUser = await _unitOfWork.AccountRepository.GetByEmailAsync(createUserAccountRequest.Email);
+
+                if (existingUser != null)
+                {
+                    return new CreateUserAccountResponse()
+                    {
+                        IsSuccessfullyCreated = false,
+                        ExceptionMessage = ExceptionMessages.UserAlreadyExists
+                    };
+                }
+
+                var accountEntity = _mapper.Map<AccountEntity>(createUserAccountRequest);
+                await _unitOfWork.AccountRepository.CreateAsync(accountEntity);
+                _unitOfWork.Commit();
+
                 return new CreateUserAccountResponse()
                 {
-                    IsSuccessfullyCreated = false,
-                    ExceptionMessage = ExceptionMessages.UserAlreadyExists
+                    IsSuccessfullyCreated = true
                 };
             }
-
-            var accountEntity = _mapper.Map<AccountEntity>(createUserAccountRequest);
-            await _unitOfWork.AccountRepository.CreateAsync(accountEntity);
-            _unitOfWork.Commit();
-
-            return new CreateUserAccountResponse()
-            {
-                IsSuccessfullyCreated = true
-            };
         }
     }
 }

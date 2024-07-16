@@ -10,10 +10,12 @@ namespace BP.AccountsMS.AccountsApi.Controllers
     public class AccountController : ControllerBase
     {
         private readonly IAccountService _accountService;
+        private readonly IEmailService _emailService;
 
-        public AccountController(IAccountService accountService)
+        public AccountController(IAccountService accountService, IEmailService emailService)
         {
             _accountService = accountService ?? throw new ArgumentNullException(nameof(accountService));
+            _emailService = emailService ?? throw new ArgumentNullException(nameof(emailService));
         }
 
         [HttpGet]
@@ -21,6 +23,13 @@ namespace BP.AccountsMS.AccountsApi.Controllers
         {
             var result = await _accountService.GetAccountAsync();
             return Ok(result);
+        }
+
+        [HttpGet("email-verification-code")]
+        public async Task<IActionResult> GetEmailVerificationCodeAsync()
+        {
+            await _emailService.RequestVerificationCodeAsync();
+            return Ok();
         }
     }
 }

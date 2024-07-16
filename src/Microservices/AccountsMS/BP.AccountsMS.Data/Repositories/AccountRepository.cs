@@ -28,7 +28,8 @@ namespace BP.AccountsMS.Data.Repositories
             var sql = $@"INSERT INTO Users 
                 VALUES(@Id, @FirstName, @LastName, @Email, @IsEmailConfirmed, @Role)";
 
-            await connection.ExecuteAsync(sql,
+            await connection.ExecuteAsync(
+                sql,
                 param: new
                 {
                     Id = accountEntity.Id,

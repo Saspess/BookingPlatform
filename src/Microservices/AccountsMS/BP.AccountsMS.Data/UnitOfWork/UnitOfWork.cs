@@ -5,12 +5,13 @@ using BP.AccountsMS.Data.UnitOfWork.Contracts;
 
 namespace BP.AccountsMS.Data.UnitOfWork
 {
-    internal class UnitOfWork : IUnitOfWork, IDisposable
+    internal class UnitOfWork : IUnitOfWork
     {
         private readonly IDbTransaction _transaction;
         private readonly IDbConnection _connection;
 
         private IAccountRepository _userRepository;
+        private IOneTimePasswordRepository _oneTimePasswordRepository;
         private bool _isDisposed = false;
 
         public UnitOfWork(IDbConnection dbConnection)
@@ -25,6 +26,14 @@ namespace BP.AccountsMS.Data.UnitOfWork
             get
             {
                 return _userRepository ??= new AccountRepository(_transaction);
+            }
+        }
+
+        public IOneTimePasswordRepository OneTimePasswordRepository
+        {
+            get
+            {
+                return _oneTimePasswordRepository ??= new OneTimePasswordRepository(_transaction);
             }
         }
 

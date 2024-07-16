@@ -23,6 +23,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\BP.Business.Common\BP.Business.Common.csproj" />
     <ProjectReference Include="..\..\..\Infrastructure\BP.AuthProvider\BP.AuthProvider.csproj" />
+    <ProjectReference Include="..\..\..\Infrastructure\BP.EmailSender\BP.EmailSender.csproj" />
+    <ProjectReference Include="..\..\..\Utils\BP.Utils\BP.Utils.csproj" />
     <ProjectReference Include="..\BP.AccountsMS.Data\BP.AccountsMS.Data.csproj" />
   </ItemGroup>
 
