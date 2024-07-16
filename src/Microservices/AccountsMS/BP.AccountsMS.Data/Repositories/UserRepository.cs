@@ -18,8 +18,7 @@ namespace BP.AccountsMS.Data.Repositories
             var entities = await connection.QueryAsync<UserEntity>(
                 sql,
                 param: new { Email = email },
-                transaction: transaction
-                );
+                transaction: transaction);
 
             return entities.FirstOrDefault();
         }

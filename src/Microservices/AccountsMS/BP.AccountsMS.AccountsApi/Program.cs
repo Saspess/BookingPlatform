@@ -9,7 +9,6 @@ builder.Services.AddControllers();
 builder.Services.ConfigureAccountsApi(builder.Configuration);
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
