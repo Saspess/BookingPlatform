@@ -1,16 +1,19 @@
 ﻿using AutoMapper;
+using BP.AccountsMS.Business.Models.Account;
 using BP.AccountsMS.Data.Entities;
 using GrpcContracts;
 
 namespace BP.AccountsMS.Business.MappingProfiles
 {
-    internal class UserMappingProfile : Profile
+    internal class AccountMappingProfile : Profile
     {
-        public UserMappingProfile()
+        public AccountMappingProfile()
         {
-            CreateMap<CreateUserAccountRequest, UserEntity>()
+            CreateMap<CreateUserAccountRequest, AccountEntity>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => Guid.NewGuid()))
                 .ForMember(dest => dest.IsEmailConfirmed, opt => opt.MapFrom(src => false));
+
+            CreateMap<AccountEntity, AccountViewModel>();
         }
     }
 }

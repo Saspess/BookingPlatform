@@ -5,17 +5,17 @@ using Dapper;
 
 namespace BP.AccountsMS.Data.Repositories
 {
-    internal class UserRepository : BaseRepository, IUserRepository
+    internal class AccountRepository : BaseRepository, IAccountRepository
     {
-        public UserRepository(IDbTransaction transaction) : base(transaction)
+        public AccountRepository(IDbTransaction transaction) : base(transaction)
         {
         }
 
-        public async Task<UserEntity> GetByEmailAsync(string email)
+        public async Task<AccountEntity> GetByEmailAsync(string email)
         {
             var sql = $@"SELECT * FROM Users WHERE Email = @Email";
 
-            var entities = await connection.QueryAsync<UserEntity>(
+            var entities = await connection.QueryAsync<AccountEntity>(
                 sql,
                 param: new { Email = email },
                 transaction: transaction);
@@ -23,7 +23,7 @@ namespace BP.AccountsMS.Data.Repositories
             return entities.FirstOrDefault();
         }
 
-        public async Task<Guid> CreateAsync(UserEntity userEntity)
+        public async Task<Guid> CreateAsync(AccountEntity accountEntity)
         {
             var sql = $@"INSERT INTO Users 
                 VALUES(@Id, @FirstName, @LastName, @Email, @IsEmailConfirmed, @Role)";
@@ -31,16 +31,16 @@ namespace BP.AccountsMS.Data.Repositories
             await connection.ExecuteAsync(sql,
                 param: new
                 {
-                    Id = userEntity.Id,
-                    FirstName = userEntity.FirstName,
-                    LastName = userEntity.LastName,
-                    Email = userEntity.Email,
-                    IsEmailConfirmed = userEntity.IsEmailConfirmed,
-                    Role = userEntity.Role
+                    Id = accountEntity.Id,
+                    FirstName = accountEntity.FirstName,
+                    LastName = accountEntity.LastName,
+                    Email = accountEntity.Email,
+                    IsEmailConfirmed = accountEntity.IsEmailConfirmed,
+                    Role = accountEntity.Role
                 },
                 transaction: transaction);
 
-            return userEntity.Id;
+            return accountEntity.Id;
         }
     }
 }

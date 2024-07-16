@@ -4,7 +4,7 @@ namespace BP.AccountsMS.Data.UnitOfWork.Contracts
 {
     public interface IUnitOfWork
     {
-        IUserRepository UserRepository { get; }
+        IAccountRepository AccountRepository { get; }
         void Commit();
     }
 }

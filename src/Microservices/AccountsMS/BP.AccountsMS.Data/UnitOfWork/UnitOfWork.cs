@@ -10,7 +10,7 @@ namespace BP.AccountsMS.Data.UnitOfWork
         private readonly IDbTransaction _transaction;
         private readonly IDbConnection _connection;
 
-        private IUserRepository _userRepository;
+        private IAccountRepository _userRepository;
         private bool _isDisposed = false;
 
         public UnitOfWork(IDbConnection dbConnection)
@@ -20,11 +20,11 @@ namespace BP.AccountsMS.Data.UnitOfWork
             _transaction = _connection.BeginTransaction();
         }
 
-        public IUserRepository UserRepository
+        public IAccountRepository AccountRepository
         {
             get
             {
-                return _userRepository ??= new UserRepository(_transaction);
+                return _userRepository ??= new AccountRepository(_transaction);
             }
         }
 
