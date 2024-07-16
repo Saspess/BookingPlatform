@@ -4,20 +4,20 @@ using BP.AuthProvider.Services;
 using BP.AuthProvider.Services.Contracts;
 using BP.AuthProvider.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
 namespace BP.AuthProvider.IoC
 {
-    public static class ServicesExtensions
+    public static class ServiceCollectionExtensions
     {
         public static IServiceCollection ConfigureAuthProvider(this IServiceCollection services, IConfiguration configuration)
         {
             services.ConfigureAuthServices()
                 .ConfigureAuthOptions(configuration)
                 .ConfigureAuthentication(configuration);
+
             return services;
         }
 

@@ -7,7 +7,7 @@ using Microsoft.OpenApi.Models;
 
 namespace BP.Api.Common.IoC
 {
-    public static class ServicesExtensions
+    public static class ServiceCollectionExtensions
     {
         public static IServiceCollection ConfigureCurrentUserService(this IServiceCollection services)
         {

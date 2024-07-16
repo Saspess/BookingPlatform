@@ -3,7 +3,7 @@ using BP.Api.Common.IoC;
 
 namespace BP.AccountsMS.AccountsApi.IoC
 {
-    public static class ServicesExtensions
+    public static class ServiceCollectionExtensions
     {
         public static IServiceCollection ConfigureAccountsApi(this IServiceCollection services, IConfiguration configuration)
         {

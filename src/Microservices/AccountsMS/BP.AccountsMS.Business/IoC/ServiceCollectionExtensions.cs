@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace BP.AccountsMS.Business.IoC
 {
-    public static class ServicesExtensions
+    public static class ServiceCollectionExtensions
     {
         public static IServiceCollection ConfigureAccountsBusiness(this IServiceCollection services, IConfiguration configuration)
         {
