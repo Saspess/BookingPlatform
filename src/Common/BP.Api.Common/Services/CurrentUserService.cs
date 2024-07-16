@@ -15,23 +15,20 @@ namespace BP.Api.Common.Services
             _httpContext = httpContextAccessor.HttpContext ?? throw new ArgumentNullException(nameof(httpContextAccessor.HttpContext));
         }
 
-        public string Email => GetEmail();
-        public string Role => GetRole();
-
-        private string GetEmail()
+        public string GetEmail()
         {
             var emailClaim = _httpContext.User.FindFirst(ClaimTypes.Email)
                 ?? throw new NotFoundException(ExceptionMessages.ClaimNotFound);
-            var email = emailClaim.Value;
-            return email;
+
+            return emailClaim.Value;
         }
 
-        private string GetRole()
+        public string GetRole()
         {
             var roleClaim = _httpContext.User.FindFirst(ClaimTypes.Role)
                 ?? throw new NotFoundException(ExceptionMessages.ClaimNotFound);
-            var role = roleClaim.Value;
-            return role;
+
+            return roleClaim.Value;
         }
     }
 }
