@@ -1,6 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 using BP.Utils.Constants;
+using PasswordGenerator;
 
 namespace BP.Utils.Helpers
 {
@@ -28,6 +29,18 @@ namespace BP.Utils.Helpers
             var hashParts = hashedPassword.Split(PasswordValues.Separator);
             var salt = hashParts[PasswordValues.SaltPosition] ?? throw new ArgumentException(ExceptionMessges.SaltNotFound);
             return hashedPassword == HashPassword(inputPassword, salt);
+        }
+
+        public static string GeneratePassword(int length)
+        {
+            var passwordGenerator = new Password()
+                .IncludeNumeric()
+                .IncludeLowercase()
+                .IncludeUppercase()
+                .LengthRequired(length);
+
+            var tempPassword = passwordGenerator.Next();
+            return tempPassword;
         }
     }
 }

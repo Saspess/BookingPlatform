@@ -11,6 +11,18 @@ namespace BP.AccountsMS.Data.Repositories
         {
         }
 
+        public async Task<AccountEntity> GetByIdAsync(Guid id)
+        {
+            var sql = $@"SELECT * FROM Users WHERE Id = @Id";
+
+            var entities = await connection.QueryAsync<AccountEntity>(
+                sql,
+                param: new { Id = id },
+                transaction: transaction);
+
+            return entities.FirstOrDefault();
+        }
+
         public async Task<AccountEntity> GetByEmailAsync(string email)
         {
             var sql = $@"SELECT * FROM Users WHERE Email = @Email";
@@ -28,7 +40,8 @@ namespace BP.AccountsMS.Data.Repositories
             var sql = $@"INSERT INTO Users 
                 VALUES(@Id, @FirstName, @LastName, @Email, @IsEmailConfirmed, @Role)";
 
-            await connection.ExecuteAsync(sql,
+            await connection.ExecuteAsync(
+                sql,
                 param: new
                 {
                     Id = accountEntity.Id,
@@ -41,6 +54,25 @@ namespace BP.AccountsMS.Data.Repositories
                 transaction: transaction);
 
             return accountEntity.Id;
+        }
+
+        public async Task UpdateAsync(AccountEntity accountEntity)
+        {
+            var sql = $@"UPDATE Users
+                SET FirstName = @FirstName, LastName = @LastName, Email = @Email, IsEmailConfirmed = @IsEmailConfirmed
+                WHERE Id = @Id";
+
+            await connection.ExecuteAsync(
+                sql,
+                param: new
+                {
+                    FirstName = accountEntity.FirstName,
+                    LastName = accountEntity.LastName,
+                    Email = accountEntity.Email,
+                    IsEmailConfirmed = accountEntity.IsEmailConfirmed,
+                    Id = accountEntity.Id
+                },
+                transaction: transaction);
         }
     }
 }

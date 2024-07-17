@@ -6,5 +6,8 @@
         public const string UserNotFound = "user_not_found";
         public const string InvalidCredentials = "invalid_credentials";
         public const string ClaimNotFound = "claim_not_found";
+        public const string ActivePasswordNotFound = "active_password_not_found";
+        public const string PasswordExpired = "password_expired";
+        public const string InvalidVerificationCode = "invalid_verification_code";
     }
 }
