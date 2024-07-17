@@ -43,7 +43,7 @@ namespace BP.AccountsMS.Business.Services
                 var currentUserAccount = await _unitOfWork.AccountRepository.GetByEmailAsync(_currentUserService.GetEmail())
                     ?? throw new NotFoundException(ExceptionMessages.UserNotFound);
 
-                await _unitOfWork.OneTimePasswordRepository.DeactivateAsync(currentUserAccount.Id);
+                await _unitOfWork.OneTimePasswordRepository.DeactivateAllAsync(currentUserAccount.Id);
 
                 var oneTimePassword = PasswordHelper.GeneratePassword(_emailVerificationSettings.OneTimePasswordLength);
 
@@ -68,6 +68,39 @@ namespace BP.AccountsMS.Business.Services
 
                 await _emailSendingService.SendMessageAsync(message);
 
+                _unitOfWork.Commit();
+            }
+        }
+
+        public async Task VerifyEmailAsync(string emailVerificationCode)
+        {
+            using (_unitOfWork)
+            {
+                var currentUserAccount = await _unitOfWork.AccountRepository.GetByEmailAsync(_currentUserService.GetEmail())
+                    ?? throw new NotFoundException(ExceptionMessages.UserNotFound);
+
+                var activeOneTimePassword = await _unitOfWork.OneTimePasswordRepository.GetActiveAsync(currentUserAccount.Id)
+                    ?? throw new NotFoundException(ExceptionMessages.ActivePasswordNotFound);
+
+                if (activeOneTimePassword.ExpiredAtUtc < DateTime.UtcNow)
+                {
+                    await _unitOfWork.OneTimePasswordRepository.DeactivateOneAsync(activeOneTimePassword.Id);
+                    _unitOfWork.Commit();
+
+                    throw new InvalidCredentialsException(ExceptionMessages.PasswordExpired);
+                }
+
+                var isPasswordValid = PasswordHelper.VerifyPassword(emailVerificationCode, activeOneTimePassword.Password);
+
+                if (!isPasswordValid)
+                {
+                    throw new InvalidCredentialsException(ExceptionMessages.InvalidVerificationCode);
+                }
+
+                await _unitOfWork.OneTimePasswordRepository.DeactivateOneAsync(activeOneTimePassword.Id);
+
+                currentUserAccount.IsEmailConfirmed = true;
+                await _unitOfWork.AccountRepository.UpdateAsync(currentUserAccount);
                 _unitOfWork.Commit();
             }
         }

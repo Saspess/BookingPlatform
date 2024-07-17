@@ -3,5 +3,6 @@
     public interface IEmailService
     {
         Task RequestVerificationCodeAsync();
+        Task VerifyEmailAsync(string emailVerificationCode);
     }
 }

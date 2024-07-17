@@ -7,7 +7,7 @@ namespace BP.AccountsMS.Data.UnitOfWork
 {
     internal class UnitOfWork : IUnitOfWork
     {
-        private readonly IDbTransaction _transaction;
+        private IDbTransaction _transaction;
         private readonly IDbConnection _connection;
 
         private IAccountRepository _userRepository;
@@ -51,6 +51,7 @@ namespace BP.AccountsMS.Data.UnitOfWork
             finally
             {
                 _transaction.Dispose();
+                _transaction = _connection.BeginTransaction();
             }
         }
 

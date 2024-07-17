@@ -11,12 +11,13 @@ namespace BP.AccountsMS.Data.Repositories
         {
         }
 
-        public async Task<OneTimePasswordEntity> GetActiveAsync()
+        public async Task<OneTimePasswordEntity> GetActiveAsync(Guid accountId)
         {
-            var sql = $@"SELECT * FROM OneTimePasswords WHERE IsActive = 1";
+            var sql = $@"SELECT * FROM OneTimePasswords WHERE IsActive = 1 AND UserId = @AccountId";
 
             var entities = await connection.QueryAsync<OneTimePasswordEntity>(
                 sql,
+                param: new { AccountId = accountId },
                 transaction: transaction);
 
             return entities.FirstOrDefault();
@@ -43,15 +44,35 @@ namespace BP.AccountsMS.Data.Repositories
             return oneTimePasswordEntity.Id;
         }
 
-        public async Task DeactivateAsync(Guid accountId)
+        public async Task DeactivateOneAsync(Guid passwordId)
         {
             var sql = $@"UPDATE OneTimePasswords
-                SET IsActive = 0
+                SET IsActive = 0, ExpiredAtUtc = @ExpiredAtUtc
+                WHERE Id = @Id";
+
+            await connection.ExecuteAsync(
+                sql,
+                param: new
+                {
+                    ExpiredAtUtc = DateTime.UtcNow,
+                    Id = passwordId 
+                },
+                transaction: transaction);
+        }
+
+        public async Task DeactivateAllAsync(Guid accountId)
+        {
+            var sql = $@"UPDATE OneTimePasswords
+                SET IsActive = 0, ExpiredAtUtc = @ExpiredAtUtc
                 WHERE IsActive = 1 AND UserId = @AccountId";
 
             await connection.ExecuteAsync(
                 sql,
-                param: new { AccountId = accountId },
+                param: new 
+                {
+                    ExpiredAtUtc = DateTime.UtcNow,
+                    AccountId = accountId 
+                },
                 transaction: transaction);
         }
     }

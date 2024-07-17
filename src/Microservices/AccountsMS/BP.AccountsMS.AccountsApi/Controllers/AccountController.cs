@@ -31,5 +31,12 @@ namespace BP.AccountsMS.AccountsApi.Controllers
             await _emailService.RequestVerificationCodeAsync();
             return Ok();
         }
+
+        [HttpPatch("email-verification-status")]
+        public async Task<IActionResult> VerifyEmailAsync([FromQuery] string verificationCode)
+        {
+            await _emailService.VerifyEmailAsync(verificationCode);
+            return Ok();
+        }
     }
 }
