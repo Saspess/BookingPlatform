@@ -1,0 +1,62 @@
+version: '3.4'
+
+services:
+  bp.identityms.identityapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_HTTP_PORTS=8080
+    depends_on:
+      - mongo
+    ports:
+      - "6010:8080"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+    networks:
+      - bp-network
+
+  bp.accountsms.accountsapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_HTTP_PORTS=8080
+    depends_on:
+      - mssqldb
+    ports:
+      - "6020:8080"
+      - "5001:5001"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+    networks:
+      - bp-network
+
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb-container:/data/db 
+    networks:
+      - bp-network
+  
+  mssqldb:
+     ports:
+        - "1433:1433"
+     environment:
+        SA_PASSWORD: "<Pass1234>"
+        ACCEPT_EULA: "Y"
+     volumes:
+          - mssql-server-linux-data:/var/opt/mssql
+     networks:
+      - bp-network
+
+volumes:
+  mssql-server-linux-data:
+  mongodb-container:
+
+networks:
+  bp-network:

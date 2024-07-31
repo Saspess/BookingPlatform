@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+  bp.identityms.identityapi:
+    image: ${DOCKER_REGISTRY-}bpidentitymsidentityapi
+    build:
+      context: .
+      dockerfile: src/Microservices/IdentityMS/BP.IdentityMS.IdentityApi/Dockerfile
+
+  bp.accountsms.accountsapi:
+    image: ${DOCKER_REGISTRY-}bpaccountsmsaccountsapi
+    build:
+      context: .
+      dockerfile: src/Microservices/AccountsMS/BP.AccountsMS.AccountsApi/Dockerfile
+
+  mongo:
+    container_name: "MongoDB"
+    image: mongo
+
+  mssqldb:
+    container_name: "MsSqlDB"
+    image: "mcr.microsoft.com/mssql/server:2019-latest"
+
