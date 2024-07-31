@@ -1,4 +1,5 @@
-﻿using BP.Api.Common.Middleware;
+﻿using BP.Api.Common.Constants;
+using BP.Api.Common.Middleware;
 using BP.IdentityMS.Business.IoC;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +13,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment(ApplicationEnvironments.Docker))
 {
     app.UseSwagger();
     app.UseSwaggerUI();

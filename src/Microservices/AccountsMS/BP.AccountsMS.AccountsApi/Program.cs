@@ -1,5 +1,6 @@
 ﻿using BP.AccountsMS.AccountsApi.IoC;
 using BP.AccountsMS.AccountsApi.Services;
+using BP.Api.Common.Constants;
 using BP.Api.Common.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment(ApplicationEnvironments.Docker))
 {
     app.UseSwagger();
     app.UseSwaggerUI();
