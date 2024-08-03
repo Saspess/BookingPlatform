@@ -14,10 +14,10 @@ services:
       dockerfile: src/Microservices/AccountsMS/BP.AccountsMS.AccountsApi/Dockerfile
 
   mongo:
-    container_name: "MongoDB"
+    container_name: "MongoDb"
     image: mongo
 
-  mssqldb:
-    container_name: "MsSqlDB"
+  mssql:
+    container_name: "MsSqlDb"
     image: "mcr.microsoft.com/mssql/server:2019-latest"
 

@@ -13,7 +13,7 @@ namespace BP.AccountsMS.Data.Repositories
 
         public async Task<AccountEntity> GetByIdAsync(Guid id)
         {
-            var sql = $@"SELECT * FROM Users WHERE Id = @Id";
+            var sql = $@"SELECT * FROM Accounts WHERE Id = @Id";
 
             var entities = await connection.QueryAsync<AccountEntity>(
                 sql,
@@ -25,7 +25,7 @@ namespace BP.AccountsMS.Data.Repositories
 
         public async Task<AccountEntity> GetByEmailAsync(string email)
         {
-            var sql = $@"SELECT * FROM Users WHERE Email = @Email";
+            var sql = $@"SELECT * FROM Accounts WHERE Email = @Email";
 
             var entities = await connection.QueryAsync<AccountEntity>(
                 sql,
@@ -37,7 +37,7 @@ namespace BP.AccountsMS.Data.Repositories
 
         public async Task<Guid> CreateAsync(AccountEntity accountEntity)
         {
-            var sql = $@"INSERT INTO Users 
+            var sql = $@"INSERT INTO Accounts 
                 VALUES(@Id, @FirstName, @LastName, @Email, @IsEmailConfirmed, @Role)";
 
             await connection.ExecuteAsync(
@@ -58,7 +58,7 @@ namespace BP.AccountsMS.Data.Repositories
 
         public async Task UpdateAsync(AccountEntity accountEntity)
         {
-            var sql = $@"UPDATE Users
+            var sql = $@"UPDATE Accounts
                 SET FirstName = @FirstName, LastName = @LastName, Email = @Email, IsEmailConfirmed = @IsEmailConfirmed
                 WHERE Id = @Id";
 

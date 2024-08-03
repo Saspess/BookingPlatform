@@ -13,7 +13,7 @@ namespace BP.AccountsMS.Data.Repositories
 
         public async Task<OneTimePasswordEntity> GetActiveAsync(Guid accountId)
         {
-            var sql = $@"SELECT * FROM OneTimePasswords WHERE IsActive = 1 AND UserId = @AccountId";
+            var sql = $@"SELECT * FROM OneTimePasswords WHERE IsActive = 1 AND AccountId = @AccountId";
 
             var entities = await connection.QueryAsync<OneTimePasswordEntity>(
                 sql,
@@ -26,14 +26,14 @@ namespace BP.AccountsMS.Data.Repositories
         public async Task<Guid> CreateAsync(OneTimePasswordEntity oneTimePasswordEntity)
         {
             var sql = $@"INSERT INTO OneTimePasswords 
-                VALUES(@Id, @UserId, @Password, @CreatedAtUtc, @ExpiredAtUtc, @IsActive)";
+                VALUES(@Id, @AccountId, @Password, @CreatedAtUtc, @ExpiredAtUtc, @IsActive)";
 
             await connection.ExecuteAsync(
                 sql,
                 param: new
                 {
                     Id = oneTimePasswordEntity.Id,
-                    UserId = oneTimePasswordEntity.UserId,
+                    AccountId = oneTimePasswordEntity.AccountId,
                     Password = oneTimePasswordEntity.Password,
                     CreatedAtUtc = oneTimePasswordEntity.CreatedAtUtc,
                     ExpiredAtUtc = oneTimePasswordEntity.ExpiredAtUtc,
@@ -64,7 +64,7 @@ namespace BP.AccountsMS.Data.Repositories
         {
             var sql = $@"UPDATE OneTimePasswords
                 SET IsActive = 0, ExpiredAtUtc = @ExpiredAtUtc
-                WHERE IsActive = 1 AND UserId = @AccountId";
+                WHERE IsActive = 1 AND AccountId = @AccountId";
 
             await connection.ExecuteAsync(
                 sql,

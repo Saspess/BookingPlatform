@@ -1,5 +1,6 @@
 ﻿using BP.AccountsMS.AccountsApi.IoC;
 using BP.AccountsMS.AccountsApi.Services;
+using BP.AccountsMS.Data.Extensions;
 using BP.Api.Common.Constants;
 using BP.Api.Common.Middleware;
 
@@ -22,6 +23,8 @@ if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment(Application
 app.MapGrpcService<GrpcUserService>();
 
 app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
+
+await app.MigrateAsync(builder.Configuration);
 
 app.UseHttpsRedirection();
 
