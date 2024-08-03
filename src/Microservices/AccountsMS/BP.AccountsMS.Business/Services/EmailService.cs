@@ -50,7 +50,7 @@ namespace BP.AccountsMS.Business.Services
                 var oneTimePasswordEntity = new OneTimePasswordEntity()
                 {
                     Id = Guid.NewGuid(),
-                    UserId = currentUserAccount.Id,
+                    AccountId = currentUserAccount.Id,
                     Password = PasswordHelper.HashPassword(oneTimePassword, PasswordHelper.GenerateSalt()),
                     CreatedAtUtc = DateTime.UtcNow,
                     ExpiredAtUtc = DateTime.UtcNow.AddMinutes(_emailVerificationSettings.OneTimePasswordLifetimeMinutes),

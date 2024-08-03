@@ -2,12 +2,12 @@
 
 namespace BP.AccountsMS.Data.Migrations
 {
-    [Migration(1, "Create Users")]
-    public class M0001_UsersCreation : Migration
+    [Migration(1, "Create Accounts")]
+    public class M0001_AccountsCreation : Migration
     {
         public override void Up()
         {
-            Create.Table("Users")
+            Create.Table("Accounts")
                 .WithColumn("Id").AsGuid().NotNullable().PrimaryKey()
                 .WithColumn("FirstName").AsString(50).NotNullable()
                 .WithColumn("LastName").AsString(50).Nullable()
@@ -18,7 +18,7 @@ namespace BP.AccountsMS.Data.Migrations
 
         public override void Down()
         {
-            Delete.Table("Users");
+            Delete.Table("Accounts");
         }
     }
 }

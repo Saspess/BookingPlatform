@@ -9,7 +9,7 @@ namespace BP.AccountsMS.Data.Migrations
         {
             Create.Table("OneTimePasswords")
                 .WithColumn("Id").AsGuid().NotNullable().PrimaryKey()
-                .WithColumn("UserId").AsGuid().NotNullable().ForeignKey("Users", "Id")
+                .WithColumn("AccountId").AsGuid().NotNullable().ForeignKey("Accounts", "Id")
                 .WithColumn("Password").AsString(150).NotNullable()
                 .WithColumn("CreatedAtUtc").AsDateTimeOffset(7).NotNullable()
                 .WithColumn("ExpiredAtUtc").AsDateTimeOffset(7).NotNullable()
