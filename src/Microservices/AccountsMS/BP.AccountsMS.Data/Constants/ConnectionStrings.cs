@@ -1,6 +1,6 @@
 ﻿namespace BP.AccountsMS.Data.Constants
 {
-    public static class ConnectionStrings
+    internal static class ConnectionStrings
     {
         public const string MasterConnectionString = "MasterConnection";
         public const string SqlConnectionString = "SqlConnection";
