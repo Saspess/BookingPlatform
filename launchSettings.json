@@ -5,7 +5,8 @@
       "commandVersion": "1.0",
       "serviceActions": {
         "bp.identityms.identityapi": "StartDebugging",
-        "bp.accountsms.accountsapi": "StartDebugging"
+        "bp.accountsms.accountsapi": "StartDebugging",
+        "bp.bookingms.bookingapi": "StartDebugging"
       }
     }
   }

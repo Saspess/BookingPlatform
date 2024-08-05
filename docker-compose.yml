@@ -13,6 +13,12 @@ services:
       context: .
       dockerfile: src/Microservices/AccountsMS/BP.AccountsMS.AccountsApi/Dockerfile
 
+  bp.bookingms.bookingapi:
+    image: ${DOCKER_REGISTRY-}bpbookingmsbookingapi
+    build:
+      context: .
+      dockerfile: src/Microservices/BookingMS/BP.BookingMS.BookingApi/Dockerfile
+
   mongo:
     container_name: "MongoDb"
     image: mongo
@@ -20,4 +26,8 @@ services:
   mssql:
     container_name: "MsSqlDb"
     image: "mcr.microsoft.com/mssql/server:2019-latest"
+
+  postgres:
+    container_name: "PostgresDb"
+    image: postgres
 
