@@ -2,7 +2,8 @@
 {
     internal class GrpcConnectionSettings
     {
-        public string ServerAddress { get; set; }
+        public string AccountsServerAddress { get; set; }
+        public string BookingServerAddress { get; set; }
         public int ConnectionTimeout { get; set; }
     }
 }

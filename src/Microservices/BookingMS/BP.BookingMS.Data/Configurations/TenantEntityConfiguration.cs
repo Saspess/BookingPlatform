@@ -10,6 +10,7 @@ namespace BP.BookingMS.Data.Configurations
         {
             builder.HasKey(c => c.Id);
             builder.Property(c => c.Id)
+                .ValueGeneratedOnAdd()
                 .IsRequired();
 
             builder.Property(c => c.Email)

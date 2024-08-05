@@ -7,6 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Protobuf Include="Protos\party.proto" GrpcServices="Server" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="Google.Protobuf" Version="3.27.3" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.65.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.65.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\BP.Business.Common\BP.Business.Common.csproj" />
     <ProjectReference Include="..\BP.BookingMS.Data\BP.BookingMS.Data.csproj" />
   </ItemGroup>
 

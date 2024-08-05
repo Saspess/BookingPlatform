@@ -36,30 +36,45 @@ namespace BP.IdentityMS.Business.Handlers.User
                 throw new ServerConflictException(ExceptionMessages.UserAlreadyExists);
             }
 
+            using var accountsChannel = GetChannel(_grpcConnectionSettings.AccountsServerAddress, _grpcConnectionSettings.ConnectionTimeout);
             var createUserAccountRequest = _mapper.Map<CreateUserAccountRequest>(command);
-
-            using var channel = GrpcChannel.ForAddress(
-                _grpcConnectionSettings.ServerAddress,
-                new GrpcChannelOptions
-                {
-                    DisposeHttpClient = true,
-                    HttpClient = new HttpClient(new SocketsHttpHandler
-                    {
-                        ConnectTimeout = TimeSpan.FromSeconds(_grpcConnectionSettings.ConnectionTimeout)
-                    })
-                });
-
-            var client = new UserService.UserServiceClient(channel);
-            var accountCreationResponse = client.CreateUserAccount(createUserAccountRequest, cancellationToken: cancellationToken);
+            var userServiceClient = new UserService.UserServiceClient(accountsChannel);
+            var accountCreationResponse = userServiceClient.CreateUserAccount(createUserAccountRequest, cancellationToken: cancellationToken);
 
             if (!accountCreationResponse.IsSuccessfullyCreated)
             {
                 throw new ServerConflictException(accountCreationResponse?.ExceptionMessage);
             }
 
+            using var bookingChannel = GetChannel(_grpcConnectionSettings.BookingServerAddress, _grpcConnectionSettings.ConnectionTimeout);
+            var createPartyRequest = _mapper.Map<CreatePartyRequest>(command);
+            var partyServiceClient = new PartyService.PartyServiceClient(bookingChannel);
+            var partyCreationResponse = partyServiceClient.CreateParty(createPartyRequest, cancellationToken: cancellationToken);
+
+            if (!partyCreationResponse.IsSuccessfullyCreated)
+            {
+                throw new ServerConflictException(accountCreationResponse?.ExceptionMessage);
+            }
+            
             var userEntity = _mapper.Map<UserEntity>(command);
             var createdEntityId = await _userRepository.CreateAsync(userEntity);
             return createdEntityId;
+        }
+
+        private GrpcChannel GetChannel(string address, int connectionTimeout)
+        {
+            var channel = GrpcChannel.ForAddress(
+                address,
+                new GrpcChannelOptions
+                {
+                    DisposeHttpClient = true,
+                    HttpClient = new HttpClient(new SocketsHttpHandler
+                    {
+                        ConnectTimeout = TimeSpan.FromSeconds(connectionTimeout)
+                    })
+                });
+
+            return channel;
         }
     }
 }

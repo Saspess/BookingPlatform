@@ -1,0 +1,22 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "GrpcContracts";
+
+package party;
+
+service PartyService
+{
+    rpc CreateParty (CreatePartyRequest) returns (CreatePartyResponse);
+}
+
+message CreatePartyRequest
+{
+    string Email = 1;
+    string Role = 2;
+}
+
+message CreatePartyResponse
+{
+    bool IsSuccessfullyCreated = 1;
+    string ExceptionMessage = 2;
+}

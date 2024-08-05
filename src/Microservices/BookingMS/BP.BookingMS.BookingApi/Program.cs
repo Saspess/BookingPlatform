@@ -1,13 +1,14 @@
 ﻿using BP.Api.Common.Constants;
 using BP.Api.Common.Middleware;
-using BP.BookingMS.Business.IoC;
+using BP.BookingMS.BookingApi.IoC;
+using BP.BookingMS.BookingApi.Services;
 using BP.BookingMS.Data.Init;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-builder.Services.ConfigureBookingBusiness(builder.Configuration);
+builder.Services.ConfigureBookingApi(builder.Configuration);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -21,6 +22,8 @@ if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment(Application
 }
 
 DbInitializer.InitializeDatabase(app.Services);
+
+app.MapGrpcService<GrpcPartyService>();
 
 app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
 
