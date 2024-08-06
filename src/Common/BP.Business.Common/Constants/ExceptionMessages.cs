@@ -9,5 +9,6 @@
         public const string ActivePasswordNotFound = "active_password_not_found";
         public const string PasswordExpired = "password_expired";
         public const string InvalidVerificationCode = "invalid_verification_code";
+        public const string UnsupportedRole = "unsupported_role";
     }
 }

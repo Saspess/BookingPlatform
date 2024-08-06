@@ -20,6 +20,9 @@ namespace BP.IdentityMS.Business.MappingProfiles
 
             CreateMap<UserRegisterCommand, CreateUserAccountRequest>()
                 .ForMember(dest => dest.Role, opt => opt.MapFrom(src => Enum.GetName(typeof(Role), src.Role).ToString()));
+
+            CreateMap<UserRegisterCommand, CreatePartyRequest>()
+                .ForMember(dest => dest.Role, opt => opt.MapFrom(src => Enum.GetName(typeof(Role), src.Role).ToString()));
         }
     }
 }
