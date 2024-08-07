@@ -9,6 +9,7 @@ namespace BP.BookingMS.Data.Contexts
     {
         public DbSet<LandlordEntity> Landlords {  get; set; }
         public DbSet<TenantEntity> Tenants { get; set; }
+        public DbSet<HotelEntity> Hotels { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 

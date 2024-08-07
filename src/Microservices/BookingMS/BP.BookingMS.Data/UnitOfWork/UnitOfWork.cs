@@ -12,6 +12,7 @@ namespace BP.BookingMS.Data.UnitOfWork
 
         private IGenericRepository<LandlordEntity> _landlordRepository;
         private IGenericRepository<TenantEntity> _tenantRepository;
+        private IGenericRepository<HotelEntity> _hotelRepository;
 
         public UnitOfWork(IApplicationDbContext appContext)
         {
@@ -31,6 +32,14 @@ namespace BP.BookingMS.Data.UnitOfWork
             get
             {
                 return _tenantRepository ??= new GenericRepository<TenantEntity>(_appContext);
+            }
+        }
+
+        public IGenericRepository<HotelEntity> HotelRepository
+        {
+            get
+            {
+                return _hotelRepository ??= new GenericRepository<HotelEntity>(_appContext);
             }
         }
 

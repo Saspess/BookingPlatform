@@ -3,6 +3,7 @@ using BP.BookingMS.Data.Contexts;
 using BP.BookingMS.Data.Contexts.Contracts;
 using BP.BookingMS.Data.Repositories;
 using BP.BookingMS.Data.Repositories.Contracts;
+using BP.BookingMS.Data.UnitOfWork.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -37,7 +38,7 @@ namespace BP.BookingMS.Data.IoC
 
         private static IServiceCollection ConfigureUnitOfWork(this IServiceCollection services)
         {
-            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
             return services;
         }
     }

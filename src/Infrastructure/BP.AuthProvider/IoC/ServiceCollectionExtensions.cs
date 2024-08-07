@@ -14,7 +14,8 @@ namespace BP.AuthProvider.IoC
     {
         public static IServiceCollection ConfigureAuthProvider(this IServiceCollection services, IConfiguration configuration)
         {
-            services.ConfigureAuthServices()
+            services
+                .ConfigureAuthServices()
                 .ConfigureAuthOptions(configuration)
                 .ConfigureAuthentication(configuration);
 

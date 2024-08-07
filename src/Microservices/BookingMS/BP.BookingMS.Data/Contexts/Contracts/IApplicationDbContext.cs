@@ -7,6 +7,7 @@ namespace BP.BookingMS.Data.Contexts.Contracts
     {
         DbSet<LandlordEntity> Landlords { get; set; }
         DbSet<TenantEntity> Tenants { get; set; }
+        DbSet<HotelEntity> Hotels { get; set; }
 
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
 
