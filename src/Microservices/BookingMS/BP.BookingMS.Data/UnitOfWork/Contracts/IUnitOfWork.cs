@@ -7,6 +7,7 @@ namespace BP.BookingMS.Data.UnitOfWork.Contracts
     {
         IGenericRepository<LandlordEntity> LandlordRepository { get; }
         IGenericRepository<TenantEntity> TenantRepository { get; }
+        IGenericRepository<HotelEntity> HotelRepository { get; }
         Task CommitAsync();
     }
 }
