@@ -7,7 +7,8 @@ namespace BP.AccountsMS.AccountsApi.IoC
     {
         public static IServiceCollection ConfigureAccountsApi(this IServiceCollection services, IConfiguration configuration)
         {
-            services.ConfigureAccountsBusiness(configuration)
+            services
+                .ConfigureAccountsBusiness(configuration)
                 .ConfigureGrpc()
                 .ConfigureCurrentUserService()
                 .ConfigureSwagger();

@@ -15,7 +15,8 @@ namespace BP.AccountsMS.Business.IoC
     {
         public static IServiceCollection ConfigureAccountsBusiness(this IServiceCollection services, IConfiguration configuration)
         {
-            services.ConfigureAccountsData(configuration)
+            services
+                .ConfigureAccountsData(configuration)
                 .ConfigureAutoMapper()
                 .ConfigureServices()
                 .ConfigureAuthProvider(configuration)
@@ -33,8 +34,10 @@ namespace BP.AccountsMS.Business.IoC
 
         private static IServiceCollection ConfigureServices(this IServiceCollection services)
         {
-            services.AddScoped<IAccountService, AccountService>();
-            services.AddScoped<IEmailService, EmailService>();
+            services
+                .AddScoped<IAccountService, AccountService>()
+                .AddScoped<IEmailService, EmailService>();
+
             return services;
         }
 

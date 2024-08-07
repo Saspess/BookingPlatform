@@ -11,7 +11,8 @@ namespace BP.Api.Common.IoC
     {
         public static IServiceCollection ConfigureCurrentUserService(this IServiceCollection services)
         {
-            services.AddHttpContextAccessor()
+            services
+                .AddHttpContextAccessor()
                 .AddScoped<ICurrentUserService, CurrentUserService>();
 
             return services;

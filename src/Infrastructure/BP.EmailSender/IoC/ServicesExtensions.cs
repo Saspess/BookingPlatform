@@ -11,7 +11,8 @@ namespace BP.EmailSender.IoC
     {
         public static IServiceCollection ConfigureEmailSender(this IServiceCollection services, IConfiguration configuration)
         {
-            services.ConfigureEmailServices()
+            services
+                .ConfigureEmailServices()
                 .ConfigureEmailOptions(configuration);
 
             return services;

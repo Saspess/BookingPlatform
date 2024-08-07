@@ -12,7 +12,8 @@ namespace BP.IdentityMS.Data.IoC
     {
         public static IServiceCollection ConfigureIdentityData(this IServiceCollection services, IConfiguration configuration)
         {
-            services.ConfigureRepositories()
+            services
+                .ConfigureRepositories()
                 .ConfigureMongoDb(configuration)
                 .ConfigureDataOptions(configuration);
 

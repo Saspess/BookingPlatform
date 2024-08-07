@@ -14,7 +14,8 @@ namespace BP.IdentityMS.Business.IoC
     {
         public static IServiceCollection ConfigureIdentityBusiness(this IServiceCollection services, IConfiguration configuration)
         {
-            services.ConfigureIdentityData(configuration)
+            services
+                .ConfigureIdentityData(configuration)
                 .ConfigureAutoMapper()
                 .ConfigureMediatR()
                 .ConfigureFluentValidation()
@@ -38,7 +39,8 @@ namespace BP.IdentityMS.Business.IoC
 
         private static IServiceCollection ConfigureFluentValidation(this IServiceCollection services)
         {
-            services.AddFluentValidationAutoValidation()
+            services
+                .AddFluentValidationAutoValidation()
                 .AddValidatorsFromAssembly(Assembly.GetExecutingAssembly(), includeInternalTypes: true);
 
             return services;
